@@ -1,0 +1,12 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp
+*.tmp
+
+# Local build/temp files
+__MACOSX/
+*.log

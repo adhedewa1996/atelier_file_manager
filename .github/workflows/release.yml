@@ -1,0 +1,29 @@
+name: Release 3D Assets
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Collect 3D model files
+        run: |
+          mkdir -p release-assets
+          find . -type f \( -iname "*.glb" -o -iname "*.gbl" \) -exec cp {} release-assets/ \;
+          echo "Files found:"
+          ls -R release-assets
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            release-assets/*
